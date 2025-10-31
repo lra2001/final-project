@@ -113,12 +113,13 @@ npm run dev
 Edit `vite.config.js`:
 ```js
 export default defineConfig({
+  plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://127.0.0.1:8000',
+      '/api': 'http://127.0.0.1:8000', // Proxy API requests to Django
     },
   },
-});
+})
 ```
 
 This allows React (port 5173) to communicate with Django (port 8000) without CORS issues.
