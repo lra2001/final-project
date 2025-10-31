@@ -126,6 +126,23 @@ This allows React (port 5173) to communicate with Django (port 8000) without COR
 
 ---
 
+## Create Django app
+### 1. Create first Django app (i.e. api)
+```bash
+   python manage.py startapp api
+```
+
+### 2. Add new app to settings.py
+```python
+   INSTALLED_APPS = [
+       ...
+       'rest_framework',
+       'api',
+   ]
+```
+
+---
+
 ## Folder Structure (Planned)
 
 ```
