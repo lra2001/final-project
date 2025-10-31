@@ -129,17 +129,101 @@ This allows React (port 5173) to communicate with Django (port 8000) without COR
 ## Create Django app
 ### 1. Create first Django app (i.e. api)
 ```bash
-   python manage.py startapp api
+python manage.py startapp api
 ```
 
 ### 2. Add new app to settings.py
 ```python
-   INSTALLED_APPS = [
-       ...
-       'rest_framework',
-       'api',
-   ]
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    'api',
+]
 ```
+
+### 3. Create test for endpoint
+```python
+from django.http import JsonResponse
+
+# Create your views here.
+
+def test(request):
+    return JsonResponse({'message': 'test completed successfully'})
+```
+
+### 4. Create urls.py for new app
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('test/', views.test, name='test'),
+]
+```
+
+### 5. Include urls.py from api on project (gaming_community_dashboard/urls.py)
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),  # All API routes live under /api/
+]
+```
+
+### 6. Test endpoint
+```bash
+python manage.py runserver
+```
+Access http://127.0.0.1:8000/api/ping/ and confirm message displays correctly "{"message": "test completed successfully"}"
+
+### 7. Test connection from React by editing frontend/src/App.jsx
+```jsx
+import { useEffect, useState } from "react";
+
+function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    fetch("/api/test/")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch((err) => console.error(err));
+  }, []);
+
+  return <h1>Backend says: {message}</h1>;
+}
+
+export default App;
+```
+
+Open a new terminal while the Django app is running and type npm run dev. Page should display "Backend says: test completed successfully"
+
+### 8. Update tests to use Django REST framework
+api/views.py
+```python
+from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+# Create your views here.
+
+@api_view(['GET'])
+def api(request):
+    return Response({'message': 'Api load correctly!'})
+```
+
+api/urls.py
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('api/', views.api, name='test_api'),
+]
+```
+
 
 ---
 

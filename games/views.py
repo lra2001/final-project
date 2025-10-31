@@ -5,5 +5,5 @@ from rest_framework.decorators import api_view
 # Create your views here.
 
 @api_view(['GET'])
-def api(request):
-    return Response({'message': 'Api load correctly!'})
+def games(request):
+    return Response({'message': 'Games load correctly!'})
