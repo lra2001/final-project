@@ -40,7 +40,7 @@ function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("/api/test/")
+    fetch("/api/api/")
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch((err) => console.error(err));
