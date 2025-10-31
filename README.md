@@ -44,10 +44,15 @@ python -m pip install --upgrade pip
 
 ### 4. Install Django and REST Framework
 ```bash
-pip install django djangorestframework python-dotenv psycopg[binary]
+pip install django djangorestframework python-dotenv psycopg2-binary
 ```
 
-### 5. Configure PostgreSQL Database
+### 5. Create Django Project
+```bash
+django-admin startproject gaming_community_dashboard .
+```
+
+### 6. Configure PostgreSQL Database
 Create a `.env` file in your project root:
 ```env
 ENGINE=django.db.backends.postgresql
@@ -76,13 +81,13 @@ DATABASES = {
 }
 ```
 
-### 6. Apply Migrations
+### 7. Apply Migrations
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 7. Create Superuser
+### 8. Create Superuser
 ```bash
 python manage.py createsuperuser
 ```
