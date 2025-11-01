@@ -29,7 +29,7 @@ export default App;
 
 // function App() {
 //   const [messages, setMessages] = useState([]);
-//   const endpoints = ["/api/api/", "/games/games", "/users/users", "/dashboard/dashboard", "/reviews/reviews"];
+//   const endpoints = ["/core/core/", "/games/games", "/users/users", "/dashboard/dashboard", "/reviews/reviews"];
 
 //   useEffect(() => {
 
