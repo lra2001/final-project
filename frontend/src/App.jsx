@@ -1,52 +1,67 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vite.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
-
-// export default App
-
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Games from "./pages/Games";
+import Reviews from "./pages/Reviews";
+import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("/api/api/")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((err) => console.error(err));
-  }, []);
-
-  return <h1>Backend says: {message}</h1>;
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
+
+// Test fetching API messages
+
+// import { useEffect, useState } from "react";
+
+// function App() {
+//   const [messages, setMessages] = useState([]);
+//   const endpoints = ["/api/api/", "/games/games", "/users/users", "/dashboard/dashboard", "/reviews/reviews"];
+
+//   useEffect(() => {
+
+//     Promise.all(
+//       endpoints.map((url) =>
+//         fetch(url)
+//             .then((res) => {
+//                 if (!res.ok) {
+//                     return new Error(`Request to URL ${url} failed with status ${res.status}`);
+//                 }
+//                 return res.json();
+//             })
+//             .then((data) => ({ url, message: data.message }))
+//             .catch((error) => ({ url, message: `Error: ${error.message}` }))
+//         )
+//     )
+//     .then((results) => setMessages(results))
+//     .catch((err) => console.error("Unexpected error fetching endpoints:", err));
+//   }, []);
+
+//   return (
+//     <div>
+//         <h1>API Messages:</h1>
+//         <ul>
+//             {messages.map((item, index) => (
+//                 <li key={index}>
+//                     <strong>{item.url}:</strong> {item.message}
+//                 </li>
+//             ))}
+//         </ul>
+//     </div>
+//   );
+// }
+
+// export default App;

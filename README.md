@@ -224,8 +224,62 @@ urlpatterns = [
 ]
 ```
 
+---
+
+## Create Backend structure
+
+### 1. Create backend folder - Move apps, .env and manage.py to the new BE folder
+In terminal, on the root folder, type:
+```bash
+mkdir backend
+mv api .\backend\
+mv .\gaming_community_dashboard\ .\backend\
+mv users .\backend\
+mv games .\backend\
+mv reviews .\backend\
+mv .\dashboard\ .\backend\
+mv .env .\backend
+mv manage.py .\backend\
+```
 
 ---
+
+## react-router-dom
+### 1. Install react-router-dom
+In terminal, on the root folder, type:
+```bash
+cd .\frontend\
+npm install react-router-dom
+```
+
+### 2. Import react-router-dom
+Edit /frontend/App.jsx
+```jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Games from "./pages/Games";
+import Reviews from "./pages/Reviews";
+import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
+
+function App() {
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+```
 
 ## Folder Structure (Planned)
 
