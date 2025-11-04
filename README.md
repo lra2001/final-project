@@ -112,12 +112,21 @@ npm run dev
 ### 3. Configure Proxy for API Requests
 Edit `vite.config.js`:
 ```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+const baseURL = 'http://127.0.0.1:8000'
+const arrayApiTantoFaz = ['/core', '/games', '/users', '/dashboard', '/reviews']
+
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
-      '/api': 'http://127.0.0.1:8000', // Proxy API requests to Django
-    },
+    proxy: Object.fromEntries(
+      arrayApiTantoFaz.map((path) => [
+        path,baseURL
+      ])
+    ),
   },
 })
 ```
@@ -255,7 +264,7 @@ npm install react-router-dom
 ### 2. Import react-router-dom
 Edit /frontend/App.jsx
 ```jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Games from "./pages/Games";
@@ -265,7 +274,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -274,11 +283,49 @@ function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
 export default App;
+```
+
+## CSS, Bootstrap and JS
+### 1. Add global css
+Create global.css file in /frontend/src/styles/
+
+### 2. Update app css
+Update app.css to display full width
+
+### 3. Add Bootstrap CSS and JS bundle
+```bash
+npm i @popperjs/core
+npm i bootstrap
+```
+
+## Connect to RAWG
+### 1. Create rawg.js
+```js
+const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
+const BASE_URL = "https://api.rawg.io/api";
+
+export async function fetchGames(query = "", page = 1, pageSize = 10) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/games?key=${API_KEY}&search=${query}&page=${page}&page_size=${pageSize}`
+    );
+    if (!response.ok) throw new Error("Failed to fetch games");
+    const data = await response.json();
+    return {
+      results: data.results,
+      next: data.next,
+      previous: data.previous
+    };
+  } catch (error) {
+    console.error(error);
+    return { results: [], next: null, previous: null };
+  }
+}
 ```
 
 ## Folder Structure (Planned)
@@ -322,3 +369,35 @@ The goal is to make the app installable and available offline using:
 - Dashboard for user activity
 - PWA support (installable and offline-ready)
 - API integration for external game data
+
+## Resources
+### w3schools
+- [Python](https://www.w3schools.com/python/default.asp)
+- [Django](https://www.w3schools.com/django/index.php)
+- [postgreSQL](https://www.w3schools.com/postgresql/index.php)
+- [React](https://www.w3schools.com/react/default.asp)
+- [Node.js](https://www.w3schools.com/nodejs/)
+- [npm](https://www.w3schools.com/whatis/whatis_npm.asp)
+- [Bootsrap 5](https://www.w3schools.com/bootstrap5/)
+
+
+### Official Documentation
+- [Django REST Framework](https://www.django-rest-framework.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Psycopg](https://www.psycopg.org/docs/install.html)
+- [nodeJS](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs)
+- [npm](https://docs.npmjs.com/)
+- [React](https://react.dev/)
+- [Vite](https://vite.dev/guide/)
+- [React Router](https://reactrouter.com/home)
+- [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+- [git](https://git-scm.com/docs)
+- [GitHub](https://github.com/)
+- [Render](https://render.com/docs)
+- [PWA - Progressive Web App](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/What_is_a_progressive_web_app)
+
+### Installation
+- [react-router](https://www.npmjs.com/package/react-router)
+- [@popperjs/core](https://www.npmjs.com/package/@popperjs/core)
+- [bootstrap](https://www.npmjs.com/package/bootstrap?activeTab=versions)
