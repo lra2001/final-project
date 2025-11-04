@@ -265,29 +265,6 @@ npm install react-router-dom
 Edit /frontend/App.jsx
 ```jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import Games from "./pages/Games";
-import Reviews from "./pages/Reviews";
-import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-
-export default App;
 ```
 
 ## CSS, Bootstrap and JS
@@ -398,6 +375,8 @@ The goal is to make the app installable and available offline using:
 - [PWA - Progressive Web App](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/What_is_a_progressive_web_app)
 
 ### Installation
+- [psycopg2](https://pypi.org/project/psycopg2/)
+- [python-dotenv](https://pypi.org/project/python-dotenv/)
 - [react-router](https://www.npmjs.com/package/react-router)
 - [@popperjs/core](https://www.npmjs.com/package/@popperjs/core)
 - [bootstrap](https://www.npmjs.com/package/bootstrap?activeTab=versions)
