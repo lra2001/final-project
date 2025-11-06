@@ -350,6 +350,7 @@ The goal is to make the app installable and available offline using:
 ## Resources
 ### w3schools
 - [Python](https://www.w3schools.com/python/default.asp)
+- [Python RegEx](https://www.w3schools.com/python/python_regex.asp)
 - [Django](https://www.w3schools.com/django/index.php)
 - [postgreSQL](https://www.w3schools.com/postgresql/index.php)
 - [React](https://www.w3schools.com/react/default.asp)
@@ -360,6 +361,8 @@ The goal is to make the app installable and available offline using:
 
 ### Official Documentation
 - [Django REST Framework](https://www.django-rest-framework.org/)
+- [Django re-path()](https://docs.djangoproject.com/en/5.2/ref/urls/#re-path)
+- [Class-based views](https://docs.djangoproject.com/en/5.2/topics/class-based-views/#usage-in-your-urlconf)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Psycopg](https://www.psycopg.org/docs/install.html)
 - [nodeJS](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs)
