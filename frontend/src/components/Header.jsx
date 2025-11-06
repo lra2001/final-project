@@ -21,7 +21,7 @@ export default function Header({ onSearch }) {
         <input
           className="form-control me-2"
           type="search"
-          placeholder="Search games..."
+          placeholder="Search 895,920 games"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

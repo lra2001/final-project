@@ -346,6 +346,17 @@ The goal is to make the app installable and available offline using:
 - Dashboard for user activity
 - PWA support (installable and offline-ready)
 - API integration for external game data
+- Add tests
+  - Create account
+  - Log in/ Log Out
+  - Edit Account
+  - Navigate through different tabs
+  - Search for games
+
+## Future Features
+- 2FA
+- Moderate reviews (edit/delete reviews)
+- TOS (able to sanction accounts)
 
 ## Resources
 ### w3schools
@@ -383,3 +394,7 @@ The goal is to make the app installable and available offline using:
 - [react-router](https://www.npmjs.com/package/react-router)
 - [@popperjs/core](https://www.npmjs.com/package/@popperjs/core)
 - [bootstrap](https://www.npmjs.com/package/bootstrap?activeTab=versions)
+
+## Known Issues
+
+- TBC
