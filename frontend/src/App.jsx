@@ -1,30 +1,34 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Games from "./pages/Games";
 import Reviews from "./pages/Reviews";
 import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column w-100 min-vh-100">
-        <Navbar />
+      <div className="app-layout d-flex">
+        <Sidebar />
 
-        <main className="flex-fill bg-dark text-light p-4 w-100">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
+        <div className="main-content flex-grow-1 d-flex flex-column min-vh-100">
+          <Header />
 
-        <Footer />
+          <main className="flex-fill bg-dark text-light p-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/games" element={<Games />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </main>
+
+          <Footer />
+        </div>
       </div>
     </BrowserRouter>
   );
