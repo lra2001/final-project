@@ -84,3 +84,9 @@ aside {
     transform: translateX(0) !important; /* always open on desktop */
   }
 }
+
+/* --- GameCard --- */
+.card {
+  width: 200px;
+  cursor: pointer;
+}

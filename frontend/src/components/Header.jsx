@@ -1,21 +1,40 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-export default function Header({ onSearch }) {
+export default function Header() {
   const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  // Pre-fill search bar from URL
+  useEffect(() => {
+    setQuery(searchParams.get("search") || "");
+  }, [searchParams]);
+
+  // Debounce: update URL 500ms after user stops typing
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      const currentParams = Object.fromEntries(searchParams.entries());
+      navigate({
+        pathname: "/",
+        search: new URLSearchParams({
+          ...currentParams,
+          search: query,
+          page: 1, // reset pagination
+        }).toString(),
+      });
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [query]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onSearch) onSearch(query);
-    navigate("/games");
+    navigate(`/?search=${encodeURIComponent(query)}&page=1`);
   };
 
   return (
     <header className="d-flex justify-content-between align-items-center bg-dark text-light p-3 border-bottom">
-      <div className="d-flex align-items-center gap-2">
-        <h3 className="m-0">GameHub</h3>
-      </div>
+      <h3 className="m-0">GameHub</h3>
 
       <form className="d-flex" onSubmit={handleSubmit}>
         <input
@@ -25,7 +44,9 @@ export default function Header({ onSearch }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="btn btn-outline-info" type="submit">Search</button>
+        <button className="btn btn-outline-info" type="submit">
+          Search
+        </button>
       </form>
 
       <div className="d-flex gap-3">

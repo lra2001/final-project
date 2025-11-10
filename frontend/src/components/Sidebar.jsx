@@ -7,7 +7,6 @@ export default function Sidebar() {
   const links = [
     { to: "/", icon: "bi-house-door", label: "Home" },
     { to: "/dashboard", icon: "bi-speedometer2", label: "Dashboard" },
-    { to: "/games", icon: "bi-controller", label: "Games" },
     { to: "/reviews", icon: "bi-chat-left-text", label: "Reviews" },
     { to: "/login", icon: "bi-person", label: "Login" },
   ];

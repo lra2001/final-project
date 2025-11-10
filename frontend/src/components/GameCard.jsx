@@ -8,14 +8,13 @@ export default function GameCard({ game }) {
     <>
       <div
         className="card bg-dark text-light"
-        style={{ width: "200px", cursor: "pointer" }}
         onClick={() => setShow(true)}
       >
         <img src={game.background_image} alt={game.name} className="card-img-top" />
         <div className="card-body">
           <h6 className="card-title">{game.name}</h6>
-          <p className="small text-white"><i class="bi bi-star"> </i>{game.rating}</p>
-          <p className="small text-white"><i class="bi bi-joystick"> </i>{game.platforms?.map(p => p.platform.name).join(", ")}</p>
+          <p className="small text-white"><i className="bi bi-star"> </i>{game.rating}</p>
+          <p className="small text-white"><i className="bi bi-joystick"> </i>{game.platforms?.map(p => p.platform.name).join(", ")}</p>
         </div>
       </div>
 
