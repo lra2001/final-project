@@ -1,92 +1,126 @@
+/* =========================================================
+   Root Variables
+   ========================================================= */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #121212;
+  /* --- Colors --- */
+  --color-bg: #121212;
+  --color-surface: #1a1a1a;
+  --color-sidebar: #181818;
+  --color-text: rgba(255, 255, 255, 0.87);
+  --color-hover: rgba(255, 255, 255, 0.1);
+
+  /* --- Layout --- */
+  --header-height: 60px;
+  --sidebar-width: 240px;
+
+  /* --- Typography --- */
+  --font-main: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --line-height: 1.5;
+}
+
+/* =========================================================
+   Base / Reset
+   ========================================================= */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  line-height: var(--line-height);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: #121212;
-  color: #fff;
-}
-
-#root {
+/* =========================================================
+   Header (Full Width)
+   ========================================================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  height: var(--header-height);
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 1000;
 }
 
-/* --- NAVIGATION --- */
+/* =========================================================
+   Layout (Everything below header)
+   ========================================================= */
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  min-height: calc(100vh - var(--header-height));
+}
 
+/* =========================================================
+   Sidebar (Left Column)
+   ========================================================= */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--color-sidebar);
+  flex-shrink: 0;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-height)); /* ensures full height under header */
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+/* =========================================================
+   Page Content (Right Column)
+   ========================================================= */
+.page-content {
+  flex: 1;
+  background-color: var(--color-bg);
+  overflow-y: auto;
+}
+
+
+
+/* =========================================================
+   Navigation Links
+   ========================================================= */
 .nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  text-decoration: none;
+  background-color: var(--color-hover);
 }
 
 .nav-link.active {
   font-weight: 600;
 }
 
-aside {
-  position: sticky;
-  top: 0;
-}
-
-/* Header */
-.header {
-  height: 60px;
-  background-color: #1a1a1a;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1020;
-}
-
-@media (min-width: 992px) {
-  .header {
-    margin-left: 220px; /* offset sidebar width */
-  }
-}
-
-/* --- SIDEBAR --- */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  transform: translateX(0);
-  transition: transform 0.3s ease-in-out;
-  z-index: 1030;
-}
-
-.sidebar.closed {
-  transform: translateX(-100%);
-}
-
-@media (min-width: 992px) {
-  .sidebar {
-    transform: translateX(0) !important; /* always open on desktop */
-  }
-}
-
-/* --- GameCard --- */
+/* =========================================================
+   Game Cards
+   ========================================================= */
 .card {
   width: 200px;
-  cursor: pointer;
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }

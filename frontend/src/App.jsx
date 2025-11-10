@@ -13,14 +13,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app-layout d-flex">
+      <Header onSearch={setSearchQuery} />
+
+      <div className="main-layout">
         <Sidebar />
 
-        <div className="main-content flex-grow-1 d-flex flex-column min-vh-100">
-          {/* Pass onSearch prop to Header */}
-          <Header onSearch={setSearchQuery} />
-
-          <main className="flex-fill bg-dark text-light p-4">
+        <div className="page-content">
             <Routes>
               {/* Pass searchQuery down to Home */}
               <Route path="/" element={<Home searchQuery={searchQuery} />} />
@@ -28,7 +26,6 @@ function App() {
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/login" element={<Login />} />
             </Routes>
-          </main>
 
           <Footer />
         </div>
